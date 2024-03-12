@@ -15,6 +15,8 @@ app.use(cors());
 
 app.use(`/api/${config.API_VERSION}`, rootRouter);
 
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {});
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(error);
+});
 
 export { app };

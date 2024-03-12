@@ -1,8 +1,15 @@
 import { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
+import { JSONResponse } from "../response/jsonResponse.js";
 
 class AuthController {
   public async register(req: Request, res: Response, next: NextFunction) {
-    return res.json({ message: "ok" });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.json(JSONResponse.getResponse(400, "Error", errors));
+    }
+
+    return res.json(JSONResponse.getResponse(201, "Succes", null));
   }
 
   public async login(req: Request, res: Response, next: NextFunction) {}
