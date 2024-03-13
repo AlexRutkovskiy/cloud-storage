@@ -1,9 +1,10 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { rootRouter } from "./http/routes/rootRoute.js";
 import { config } from "./utils/config/config.js";
+import { errorHandler } from "./utils/exception/errorHandler.js";
 
 const app: Application = express();
 
@@ -15,8 +16,6 @@ app.use(cors());
 
 app.use(`/api/${config.API_VERSION}`, rootRouter);
 
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(error);
-});
+app.use(errorHandler);
 
 export { app };
