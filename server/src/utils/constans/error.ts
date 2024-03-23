@@ -4,6 +4,7 @@ const ERROR_MESSAGE = {
   VALIDATION: {
     NOT_VALID_EMAIL: "Not a valid e-mail address",
     MIN_LENGTH_PASSWORD: "Min length is 5 symbol",
+    FIELD_REQUIRED: "Field is required",
   },
 };
 

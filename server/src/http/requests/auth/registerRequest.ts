@@ -6,12 +6,16 @@ class RegisterRequest extends Request {
   public validate() {
     return [
       body("email")
+        .trim()
         .isEmail()
-        .trim()
-        .withMessage(ERROR_MESSAGE.VALIDATION.NOT_VALID_EMAIL),
+        .withMessage(ERROR_MESSAGE.VALIDATION.NOT_VALID_EMAIL)
+        .notEmpty()
+        .withMessage(ERROR_MESSAGE.VALIDATION.FIELD_REQUIRED),
       body("password")
-        .isLength({ min: 5 })
         .trim()
+        .notEmpty()
+        .withMessage(ERROR_MESSAGE.VALIDATION.FIELD_REQUIRED)
+        .isLength({ min: 5 })
         .withMessage(ERROR_MESSAGE.VALIDATION.MIN_LENGTH_PASSWORD),
     ];
   }
