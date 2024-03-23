@@ -2,6 +2,11 @@ import { body } from "express-validator";
 import { Request } from "../Request.js";
 import { ERROR_MESSAGE } from "../../../utils/constans/error.js";
 
+interface IUserRegister {
+  email: string;
+  password: string;
+}
+
 class RegisterRequest extends Request {
   public validate() {
     return [
@@ -22,4 +27,4 @@ class RegisterRequest extends Request {
 }
 
 const registerRequest = new RegisterRequest();
-export { registerRequest };
+export { registerRequest, IUserRegister };

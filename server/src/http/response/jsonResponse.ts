@@ -36,6 +36,10 @@ class JSONResponse {
   ): err is FieldValidationError {
     return (err as FieldValidationError).path !== undefined;
   }
+
+  public static customError(msg: string) {
+    return [{ error: msg }];
+  }
 }
 
 export { JSONResponse };
