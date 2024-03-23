@@ -14,6 +14,9 @@ class AuthController {
       );
     }
 
+    try {
+    } catch (e) {}
+
     return res.json(JSONResponse.getResponse(201, "Succes", null));
   }
 
