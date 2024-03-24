@@ -6,6 +6,7 @@ import { ApiException } from "../../utils/exception/apiException.js";
 import { IUserRegister } from "../requests/auth/registerRequest.js";
 import { userService } from "../../services/UserService.js";
 import { IUserLogin } from "../requests/auth/loginRequest.js";
+import { tokenService } from "../../services/TokenService.js";
 
 class AuthController {
   /**
@@ -29,11 +30,7 @@ class AuthController {
       const { email, password } = req.body as IUserRegister;
       await userService.createUser(email, password);
     } catch (e) {
-      return next(
-        e instanceof ApiException
-          ? ApiException.BadRequest(e.data)
-          : ApiException.ServerError()
-      );
+      return next(e instanceof ApiException ? e : ApiException.ServerError());
     }
 
     return res.json(JSONResponse.getResponse(201, "Succes", null));
@@ -60,10 +57,9 @@ class AuthController {
 
     try {
       const user = await userService.loginUser(email, password);
-      const token = jwt.sign(
+      const token = tokenService.createToken(
         { id: user.id },
-        process.env.JWT_SECRET_KEY as jwt.Secret,
-        { expiresIn: "1h" }
+        process.env.JWT_SECRET_KEY as jwt.Secret
       );
 
       return res.json(JSONResponse.getResponse(200, "Succes", { user, token }));
@@ -72,6 +68,12 @@ class AuthController {
     }
   }
 
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+   */
   public async logout(req: Request, res: Response, next: NextFunction) {}
 }
 
