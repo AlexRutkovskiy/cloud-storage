@@ -4,6 +4,14 @@ import { ApiException } from "./apiException.js";
 import { ERROR_MESSAGE } from "../constans/error.js";
 import { IResponseDataError } from "../interfaces/response.js";
 
+/**
+ *
+ * @param error
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
 const errorHandler = (
   error: Error,
   req: Request,

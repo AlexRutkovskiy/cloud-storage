@@ -8,6 +8,10 @@ interface IUserRegister {
 }
 
 class RegisterRequest extends Request {
+  /**
+   *
+   * @returns
+   */
   public validate() {
     return [
       body("email")
