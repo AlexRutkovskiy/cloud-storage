@@ -1,12 +1,22 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
+import { app } from "./App.js";
+import { config } from "./utils/config/config.js";
 
-const app: Application = express();
-const PORT = 3001;
+async function bootstrap() {
+  const connectionOptions = {
+    dbName: "cloud-storage",
+  };
 
-app.use("/", (req: Request, res: Response, next: NextFunction) => {
-  return res.json({ message: "Ok" });
-});
+  try {
+    await mongoose.connect(config.DB.URL, connectionOptions);
+    app.listen(config.PORT, () => {
+      console.log(
+        `Server run on PORT=${config.PORT} URL=http://localhost:${config.PORT}`
+      );
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-app.listen(PORT, () => {
-  console.log(`Server run on PORT=${PORT} URL=http://localhost:${PORT}`);
-});
+bootstrap().catch(() => process.exit(1));
