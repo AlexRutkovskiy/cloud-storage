@@ -5,6 +5,7 @@ import "./App.scss";
 import { Navbar } from "../NavBar";
 import { AuthContainer } from "../AuthContainer";
 import { AuthForm } from "../AuthForm";
+import { Toast } from "../../components/Toast";
 
 import { NotFoundPage } from "../../pages/404";
 
@@ -25,6 +26,7 @@ const App: FC = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
+        <Toast />
       </div>
     </BrowserRouter>
   );

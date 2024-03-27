@@ -3,6 +3,10 @@ import "./AuthForm.scss";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { userRegister } from "../../services/userService";
+import { setToast } from "../../store/features/toastSlice/toastSlice";
+import { TYPE_TOAST } from "../../utils/types/toast";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 const mainClass = "auth-form";
 
@@ -27,20 +31,33 @@ interface IFormData {
 
 
 const AuthForm: FC<IProps> = ({isLogin}: IProps) => {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = React.useState<IFormData>({})
-
   const title = React.useMemo(() => {
     return isLogin ? FORM_TITLE.LOGIN : FORM_TITLE.REGISTER;
   }, [isLogin])
 
-  const handleSubmit = React.useCallback(() => {
 
-  }, [])
+  const handleSubmit = React.useCallback((e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    isLogin 
+      ? (() => {})() 
+      : userRegister(
+          formData as Record<string, string>,
+          () => setFormData({}),
+          () => {},
+          (msg: string, isError: boolean) => {
+            msg && dispatch(setToast({message: msg, type: isError ? TYPE_TOAST.NEGATIVE : TYPE_TOAST.SUCCESS}));
+          }
+        );  
+  }, [formData, isLogin, dispatch])
+
 
   const handleOnChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     setFormData((prevState: IFormData) => ({...prevState, [name]: e.target.value}))
   }, [])
+
 
   return (
     <>
@@ -54,6 +71,7 @@ const AuthForm: FC<IProps> = ({isLogin}: IProps) => {
               name={INPUT_TYPE.EMAIL}
               onChange={handleOnChange}
               label="Enter email"
+              required
             />
           </div>
           <div className={`${mainClass}__row`}>
@@ -63,10 +81,15 @@ const AuthForm: FC<IProps> = ({isLogin}: IProps) => {
               name={INPUT_TYPE.PASSWORD}
               onChange={handleOnChange}
               label="Enter password"
+              required
             />
           </div>
           <div className={`${mainClass}__btn-wrapper`}>
-            <Button title={title} type="submit"/>
+            <Button 
+              title={title} 
+              type="submit"
+              disabled={!formData[INPUT_TYPE.EMAIL] || !formData[INPUT_TYPE.PASSWORD]}
+            />
           </div>
         </div>      
       </form>  

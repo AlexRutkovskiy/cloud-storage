@@ -8,7 +8,7 @@ $name: "auth-form";
     padding: 50px 40px;
     background: $bg-secondary;
     border-radius: 20px;
-    box-shadow: 5px 5px 20px 0px rgba(0,0,0,0.3);
+    box-shadow: $box-shadow;
   }
 
   &__title {
