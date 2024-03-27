@@ -5,8 +5,6 @@ type IRegisterUserData = Record<string, string>;
 
 export const userRegister = async (
   userData: IRegisterUserData,
-  successCallback = () => {},
-  errorCalback = () => {},
   finallyCalback = (msg: string, isError: boolean) => {}
 ) => {
   let msg = "";
@@ -21,11 +19,9 @@ export const userRegister = async (
 
     msg = data.message;
     isError = data.isError;
-    data.isError ? errorCalback() : successCallback();
   } catch (e) {
     msg = e instanceof Error ? e.message : "Bad request";
     isError = true;
-    errorCalback();
   } finally {
     finallyCalback(msg, isError);
   }

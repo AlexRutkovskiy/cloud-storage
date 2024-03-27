@@ -43,13 +43,15 @@ const AuthForm: FC<IProps> = ({isLogin}: IProps) => {
     isLogin 
       ? (() => {})() 
       : userRegister(
-          formData as Record<string, string>,
-          () => setFormData({}),
-          () => {},
+          {...formData},
           (msg: string, isError: boolean) => {
-            msg && dispatch(setToast({message: msg, type: isError ? TYPE_TOAST.NEGATIVE : TYPE_TOAST.SUCCESS}));
+            msg && dispatch(setToast({
+              message: msg, 
+              type: isError ? TYPE_TOAST.NEGATIVE : TYPE_TOAST.SUCCESS
+            }));
           }
         );  
+        setFormData({})
   }, [formData, isLogin, dispatch])
 
 
