@@ -1,0 +1,59 @@
+@import "../../utils/styles/variables.scss";
+
+$name: "button";
+
+.#{$name} {
+  min-height: 40px;
+  padding: 5px 20px;
+  text-transform: uppercase;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: .5px;
+  border: 2px solid $text-primary;
+  border-radius: 6px;
+  transition: $transition;
+
+  &:disabled {
+    opacity: .5;
+    cursor: auto;
+  }
+
+  &--primary {
+    background: transparent;
+    color: $text-primary;
+  
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      border-color: transparent;
+      background: $bg-third;
+      color: $text-secondary;
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    color: $extra-color-2;
+    border-color: $extra-color-2;
+  
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      border-color: $extra-color-3;
+      background: $extra-color-3;
+      color: $text-secondary;
+    }
+  }
+
+  &--negative {
+    background: transparent;
+    color: $extra-color-1;
+    border-color: $extra-color-1;
+  
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      border-color: $extra-color-1;
+      background: $extra-color-1;
+      color: $text-secondary;
+    }
+  }
+}

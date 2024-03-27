@@ -1,0 +1,51 @@
+@import "../../utils/styles/variables.scss";
+
+$name: "navbar";
+
+.#{$name} {
+  width: 100%;
+  height: $height-navbar;
+  background: $bg-secondary;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.3);
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    height: 100%;
+    padding: 10px 0;
+    margin: 0 20px;
+  }
+
+  &__column {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    height: 100%;
+  }
+
+  &__logo {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 22px;
+    color: $text-primary;
+  }
+
+  &__link {
+    color: $link;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $link-hover;
+    }
+  }
+}
