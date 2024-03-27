@@ -6,6 +6,8 @@ import { Navbar } from "../NavBar";
 import { AuthContainer } from "../AuthContainer";
 import { AuthForm } from "../AuthForm";
 
+import { NotFoundPage } from "../../pages/404";
+
 const mainClass = 'app';
 
 const App: FC = () => {
@@ -20,7 +22,7 @@ const App: FC = () => {
               <Route path="login" element={<AuthForm isLogin />} />
               <Route path="register" element={<AuthForm />} />
             </Route>
-            <Route path="*" element={<>Error</>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
       </div>
